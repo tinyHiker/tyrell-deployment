@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FaGoogle } from "react-icons/fa"
 import { useForm } from "react-hook-form"
 import { useAuth } from '../context/AuthContext'
+import Swal from 'sweetalert2'
 
 const Register = () => {
   const [message, setMessage] = useState("");
@@ -21,21 +22,45 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       await registerUser(data.username, data.email, data.password);
-      alert("User registered successfully!");
+      Swal.fire({
+              icon: 'success',
+              title: 'Registeration successful!',
+              text: 'You are now logged in.',
+              width: '600px',
+              background: '#f8fafc',
+              timer: 2000, 
+              showConfirmButton: false, 
+      });
       navigate("/");
     } catch (error) {
       setMessage("Please provide a valid email and password");
-      console.log(error);
+      console.error(error);
     }
   };
 
   const handleGoogleSignIn = async () => {
     try {
       await signInWithGoogle();
-      alert("Login successful with Google!");
+      Swal.fire({
+        icon: 'success',
+        title: 'Registeration successful!',
+        text: 'You are now logged in.',
+        width: '600px',
+        background: '#f8fafc',
+        timer: 2000, 
+        showConfirmButton: false, 
+      });
       navigate("/");
     } catch (error) {
-      alert("Google sign in failed!");
+      Swal.fire({
+              icon: 'error',
+              title: 'Registration unsuccessful',
+              text: 'Your google registration failed',
+              width: '600px',
+              background: '#f8fafc',
+              timer: 2000, 
+              showConfirmButton: false, 
+            });
       console.error(error);
     }
   };

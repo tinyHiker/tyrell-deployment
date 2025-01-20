@@ -19,7 +19,15 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       await loginUser(data.email, data.password)
-      alert("Login successful!")
+      Swal.fire({
+        icon: 'success',
+        title: 'Login was successful!',
+        text: 'Welcome! You are now logged in.',
+        width: '600px',
+        background: '#f8fafc',
+        timer: 2000, 
+        showConfirmButton: false, 
+      });
       navigate("/")
     } catch (error) {
       setMessage("Please provide a valid email and password")
@@ -33,7 +41,7 @@ const Login = () => {
       Swal.fire({
         icon: 'success',
         title: 'Login was successful',
-        text: 'Welcome back! You are now logged in.',
+        text: 'Welcome! You are now logged in.',
         width: '600px',
         background: '#f8fafc',
         timer: 2000, 
@@ -140,5 +148,4 @@ const Login = () => {
 }
 
 export default Login
-
 

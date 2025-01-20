@@ -96,7 +96,7 @@ function getTotalMoneySpent(orders) {
 const UserProfile = () => {
     const [user, loading, error] = useAuthState(auth);
     if (loading) return <div>Loading user...</div>;
-    if (error) return <div>Error loading user.</div>;
+    if (error) return <div>Please refresh...</div>;
     if (!user) return <div>Please log in</div>;
 
 
@@ -106,7 +106,7 @@ const UserProfile = () => {
         return <div>Loading orders...</div>;
     }
     if (isError2) {
-        return <div>Error fetching orders</div>;
+        return <div>Please refresh....</div>;
     }
 
     console.log("REAL USER")
@@ -132,9 +132,9 @@ const UserProfile = () => {
     
     console.log('Orders:', orders);
 
-    let email = user.email 
-    let user_id = user.uid
-    const username = realUser.name
+    let email = user?.email 
+    let user_id = user?.uid
+    const username = realUser?.name
     const commonAddress = getMostCommonAddress(orders);
     const commonPhone = getMostCommonPhone(orders);
     const recentProducts = getTenMostRecentProducts(orders);
@@ -148,7 +148,7 @@ const UserProfile = () => {
         <>
         <UserProfileCard avatarImg={avatarImg} user={user} realUser={realUser} commonAddress={commonAddress} commonPhone={commonPhone}  totalSpent={totalSpent}/>
         
-      {recentProducts.length > 0 ? <SmallBookDisplay books={recentProducts} title={"Recently Bought"} /> : <div></div>}
+      {recentProducts?.length > 0 ? <SmallBookDisplay books={recentProducts} title={"Recently Bought"} /> : <div></div>}
       
       
       </>
